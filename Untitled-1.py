@@ -23,7 +23,19 @@ def big_number_operation(arr1, arr2, operation):
     return list(map(int, str(result)))
 
 def get_array(length):
-    return [int(input(f"Введите элемент {i+1}: ")) for i in range(length)]
+    array = []
+    for i in range(length):
+        while True:
+            value = input(f"Введите элемент {i+1}: ")
+            if value == '':
+                print("Ошибка: Ввод не может быть пустым. Попробуйте снова.")
+            else:
+                try:
+                    array.append(int(value))
+                    break
+                except ValueError:
+                    print("Ошибка: Введите целое число. Попробуйте снова.")
+    return array
 
 def generate_array(length):
     return [random.randint(0, 9) for _ in range(length)]
@@ -33,7 +45,16 @@ def get_matrix(rows, cols):
     for i in range(rows):
         row = []
         for j in range(cols):
-            row.append(int(input(f"Введите элемент строки {i+1}, столбца {j+1}: ")))
+            while True:
+                value = input(f"Введите элемент строки {i+1}, столбца {j+1}: ")
+                if value == '':
+                    print("Ошибка: Ввод не может быть пустым. Попробуйте снова.")
+                else:
+                    try:
+                        row.append(int(value))
+                        break
+                    except ValueError:
+                        print("Ошибка: Введите целое число. Попробуйте снова.")
         matrix.append(row)
     return matrix
 
@@ -71,14 +92,14 @@ def menu_task3():
 def main_menu():
     while True:
         print("Задачи:\n1. Сумма чисел из двух массивов\n2. Поворот матрицы\n3. Сумма или разность больших чисел\n4. Завершить работу программы")
-        choice = int(input("Выберите пункт меню: "))
-        if choice == 1:
+        choice = input("Выберите пункт меню: ")
+        if choice == '1':
             menu_task1()
-        elif choice == 2:
+        elif choice == '2':
             menu_task2()
-        elif choice == 3:
+        elif choice == '3':
             menu_task3()
-        elif choice == 4:
+        elif choice == '4':
             print("Программа завершена.")
             break
         else:
