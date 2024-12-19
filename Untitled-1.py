@@ -1,4 +1,5 @@
 import random
+import threading
 
 def rotate_matrix_right(matrix):
     """
@@ -130,12 +131,13 @@ def choose_input_method(input_type):
         print("Неверный выбор. Попробуйте снова.")
         return choose_input_method(input_type)
 
-def menu_task1():
+def menu_task1(length, manual_input):
     """
     Меню для задачи 1: Сумма чисел из двух массивов.
+
+    :param length: Длина массивов
+    :param manual_input: True, если пользователь выбрал ввод вручную, иначе False
     """
-    length = int(input("Введите длину массивов: "))
-    manual_input = choose_input_method("массивы")
     if manual_input:
         arr1 = get_array(length)
         arr2 = get_array(length)
@@ -145,11 +147,12 @@ def menu_task1():
     result = sum_arrays(arr1, arr2)
     print("Результат:", result)
 
-def menu_task2():
+def menu_task2(manual_input):
     """
     Меню для задачи 2: Поворот матрицы.
+
+    :param manual_input: True, если пользователь выбрал ввод вручную, иначе False
     """
-    manual_input = choose_input_method("матрицу")
     if manual_input:
         rows = int(input("Введите количество строк матрицы: "))
         cols = int(input("Введите количество столбцов матрицы: "))
@@ -167,12 +170,13 @@ def menu_task2():
     for row in result:
         print(row)
 
-def menu_task3():
+def menu_task3(length, manual_input):
     """
     Меню для задачи 3: Сумма или разность больших чисел.
+
+    :param length: Длина массивов
+    :param manual_input: True, если пользователь выбрал ввод вручную, иначе False
     """
-    length = int(input("Введите длину массивов: "))
-    manual_input = choose_input_method("массивы")
     if manual_input:
         arr1 = get_array(length)
         arr2 = get_array(length)
@@ -191,11 +195,22 @@ def main_menu():
         print("Задачи:\n1. Сумма чисел из двух массивов\n2. Поворот матрицы\n3. Сумма или разность больших чисел\n4. Завершить работу программы")
         choice = input("Выберите пункт меню: ")
         if choice == '1':
-            menu_task1()
+            length = int(input("Введите длину массивов: "))
+            manual_input = choose_input_method("массивы")
+            thread = threading.Thread(target=menu_task1, args=(length, manual_input))
+            thread.start()
+            thread.join()
         elif choice == '2':
-            menu_task2()
+            manual_input = choose_input_method("матрицу")
+            thread = threading.Thread(target=menu_task2, args=(manual_input,))
+            thread.start()
+            thread.join()
         elif choice == '3':
-            menu_task3()
+            length = int(input("Введите длину массивов: "))
+            manual_input = choose_input_method("массивы")
+            thread = threading.Thread(target=menu_task3, args=(length, manual_input))
+            thread.start()
+            thread.join()
         elif choice == '4':
             print("Программа завершена.")
             break
