@@ -19,3 +19,15 @@ def big_number_operation(arr1, arr2, operation):
     elif operation == 'diff':
         result = int_arr1 - int_arr2
     return list(map(int, str(result)))
+
+def get_array(length):
+    return [int(input(f"Введите элемент {i+1}: ")) for i in range(length)]
+
+def generate_array(length):
+    return [random.randint(0, 9) for _ in range(length)]
+
+def get_matrix(rows, cols):
+    return [[int(input(f"Введите элемент [{i}][{j}]: ")) for j in range(cols)] for i in range(rows)]
+
+def generate_matrix(rows, cols):
+    return [[random.randint(0, 9) for _ in range(cols)] for _ in range(rows)]
