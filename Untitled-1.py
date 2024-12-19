@@ -61,17 +61,38 @@ def get_matrix(rows, cols):
 def generate_matrix(rows, cols):
     return [[random.randint(0, 9) for _ in range(cols)] for _ in range(rows)]
 
+def choose_input_method(input_type):
+    choice = input(f"Желаете ввести {input_type} вручную? (y/n): ")
+    if choice.lower() == 'y':
+        return True
+    elif choice.lower() == 'n':
+        return False
+    else:
+        print("Неверный выбор. Попробуйте снова.")
+        return choose_input_method(input_type)
+
 def menu_task1():
     length = int(input("Введите длину массивов: "))
-    arr1 = get_array(length)
-    arr2 = get_array(length)
+    manual_input = choose_input_method("массивы")
+    if manual_input:
+        arr1 = get_array(length)
+        arr2 = get_array(length)
+    else:
+        arr1 = generate_array(length)
+        arr2 = generate_array(length)
     result = sum_arrays(arr1, arr2)
     print("Результат:", result)
 
 def menu_task2():
-    rows = int(input("Введите количество строк матрицы: "))
-    cols = int(input("Введите количество столбцов матрицы: "))
-    matrix = get_matrix(rows, cols)
+    manual_input = choose_input_method("матрицу")
+    if manual_input:
+        rows = int(input("Введите количество строк матрицы: "))
+        cols = int(input("Введите количество столбцов матрицы: "))
+        matrix = get_matrix(rows, cols)
+    else:
+        rows = int(input("Введите количество строк матрицы: "))
+        cols = int(input("Введите количество столбцов матрицы: "))
+        matrix = generate_matrix(rows, cols)
     direction = input("Повернуть матрицу направо (right) или налево (left): ")
     if direction == 'right':
         result = rotate_matrix_right(matrix)
@@ -83,8 +104,13 @@ def menu_task2():
 
 def menu_task3():
     length = int(input("Введите длину массивов: "))
-    arr1 = get_array(length)
-    arr2 = get_array(length)
+    manual_input = choose_input_method("массивы")
+    if manual_input:
+        arr1 = get_array(length)
+        arr2 = get_array(length)
+    else:
+        arr1 = generate_array(length)
+        arr2 = generate_array(length)
     operation = input("Сумма (sum) или разность (diff): ")
     result = big_number_operation(arr1, arr2, operation)
     print("Результат:", result)
