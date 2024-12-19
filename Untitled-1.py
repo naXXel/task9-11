@@ -1,12 +1,31 @@
 import random
 
 def rotate_matrix_right(matrix):
+    """
+    Поворачивает матрицу на 90 градусов по часовой стрелке.
+
+    :param matrix: Исходная матрица
+    :return: Повернутая матрица
+    """
     return [list(reversed(col)) for col in zip(*matrix)]
 
 def rotate_matrix_left(matrix):
+    """
+    Поворачивает матрицу на 90 градусов против часовой стрелки.
+
+    :param matrix: Исходная матрица
+    :return: Повернутая матрица
+    """
     return [list(row) for row in list(zip(*matrix))[::-1]]
 
 def sum_arrays(arr1, arr2):
+    """
+    Суммирует элементы двух массивов с учетом условий задачи.
+
+    :param arr1: Первый массив
+    :param arr2: Второй массив
+    :return: Результирующий массив
+    """
     arr1.sort(reverse=True)
     arr2.sort()
     result = [a + b if a != b else 0 for a, b in zip(arr1, arr2)]
@@ -14,6 +33,14 @@ def sum_arrays(arr1, arr2):
     return result
 
 def big_number_operation(arr1, arr2, operation):
+    """
+    Выполняет операцию суммы или разности больших чисел, представленных массивами цифр.
+
+    :param arr1: Первый массив цифр
+    :param arr2: Второй массив цифр
+    :param operation: Операция ('sum' или 'diff')
+    :return: Результирующий массив цифр
+    """
     int_arr1 = int(''.join(map(str, arr1)))
     int_arr2 = int(''.join(map(str, arr2)))
     if operation == 'sum':
@@ -23,6 +50,12 @@ def big_number_operation(arr1, arr2, operation):
     return list(map(int, str(result)))
 
 def get_array(length):
+    """
+    Запрашивает у пользователя ввод массива заданной длины.
+
+    :param length: Длина массива
+    :return: Массив, введенный пользователем
+    """
     array = []
     for i in range(length):
         while True:
@@ -38,9 +71,22 @@ def get_array(length):
     return array
 
 def generate_array(length):
+    """
+    Генерирует массив случайных чисел заданной длины.
+
+    :param length: Длина массива
+    :return: Сгенерированный массив
+    """
     return [random.randint(0, 9) for _ in range(length)]
 
 def get_matrix(rows, cols):
+    """
+    Запрашивает у пользователя ввод матрицы заданного размера.
+
+    :param rows: Количество строк матрицы
+    :param cols: Количество столбцов матрицы
+    :return: Матрица, введенная пользователем
+    """
     matrix = []
     for i in range(rows):
         row = []
@@ -59,9 +105,22 @@ def get_matrix(rows, cols):
     return matrix
 
 def generate_matrix(rows, cols):
+    """
+    Генерирует матрицу случайных чисел заданного размера.
+
+    :param rows: Количество строк матрицы
+    :param cols: Количество столбцов матрицы
+    :return: Сгенерированная матрица
+    """
     return [[random.randint(0, 9) for _ in range(cols)] for _ in range(rows)]
 
 def choose_input_method(input_type):
+    """
+    Запрашивает у пользователя выбор метода ввода данных (вручную или случайно).
+
+    :param input_type: Тип ввода ('массив' или 'матрица')
+    :return: True, если пользователь выбрал ввод вручную, иначе False
+    """
     choice = input(f"Желаете ввести {input_type} вручную? (y/n): ")
     if choice.lower() == 'y':
         return True
@@ -72,6 +131,9 @@ def choose_input_method(input_type):
         return choose_input_method(input_type)
 
 def menu_task1():
+    """
+    Меню для задачи 1: Сумма чисел из двух массивов.
+    """
     length = int(input("Введите длину массивов: "))
     manual_input = choose_input_method("массивы")
     if manual_input:
@@ -84,6 +146,9 @@ def menu_task1():
     print("Результат:", result)
 
 def menu_task2():
+    """
+    Меню для задачи 2: Поворот матрицы.
+    """
     manual_input = choose_input_method("матрицу")
     if manual_input:
         rows = int(input("Введите количество строк матрицы: "))
@@ -103,6 +168,9 @@ def menu_task2():
         print(row)
 
 def menu_task3():
+    """
+    Меню для задачи 3: Сумма или разность больших чисел.
+    """
     length = int(input("Введите длину массивов: "))
     manual_input = choose_input_method("массивы")
     if manual_input:
@@ -116,6 +184,9 @@ def menu_task3():
     print("Результат:", result)
 
 def main_menu():
+    """
+    Главное меню программы.
+    """
     while True:
         print("Задачи:\n1. Сумма чисел из двух массивов\n2. Поворот матрицы\n3. Сумма или разность больших чисел\n4. Завершить работу программы")
         choice = input("Выберите пункт меню: ")
